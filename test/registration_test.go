@@ -30,5 +30,5 @@ func TestRegisterUser(t *testing.T) {
 	//Perform http request
 	response := DispatchRequest(router, "POST", "/v1/api/register", payload)
 
-	assert.Equal(t, http.StatusCreated, response.Code)
+	assert.Equal(t, http.StatusTemporaryRedirect, response.Code)
 }
