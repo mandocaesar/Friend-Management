@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 
+	"github.com/Friend-Management/shared/config"
 	"github.com/golang/glog"
 )
 
@@ -19,4 +20,11 @@ func DispatchRequest(req http.Handler, method, path string, body io.Reader) *htt
 	req.ServeHTTP(response, request)
 
 	return response
+}
+
+//LoadConfiguration : load test configuration
+func LoadConfiguration() (*config.Configuration, error) {
+	cfg, err := config.New()
+
+	return cfg, err
 }
