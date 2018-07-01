@@ -27,6 +27,8 @@ func init() {
 	flag.BoolVar(&runMigration, "migrate", false, "run db migration")
 	flag.Parse()
 
+	glog.V(2).Info("Migration status : %s", runMigration)
+
 	glog.V(2).Info("Initilizing server...")
 	cfg, err := config.New()
 
@@ -49,6 +51,24 @@ func init() {
 		panic(fmt.Errorf("Fatal error connecting to db : %s ", err))
 	}
 	db = database
+
+	glog.V(2).Info("Migration status : %s", runMigration)
+
+	if runMigration == true {
+		dbMigration, error := data.NewDbMigration(&configuration)
+		if error != nil {
+			glog.Fatalf("Failed instantiate dbmigration : %s", error)
+		}
+
+		success, error := dbMigration.Migrate()
+
+		if error != nil {
+			glog.Fatalf("Failed migrate: %s", error)
+		}
+
+		glog.V(2).Infof("database migration : %s", success)
+
+	}
 }
 
 func main() {
