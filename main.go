@@ -9,14 +9,17 @@ import (
 
 	"github.com/Friend-Management/shared"
 	"github.com/Friend-Management/shared/config"
+	"github.com/Friend-Management/shared/data"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
+	"github.com/jinzhu/gorm"
 )
 
 var (
 	runMigration  bool
 	runSeeder     bool
+	db            *gorm.DB
 	configuration config.Configuration
 )
 
@@ -31,8 +34,21 @@ func init() {
 		glog.Fatalf("Failed to load configuration: %s", err)
 		panic(fmt.Errorf("Fatal error on load configuration : %s ", err))
 	}
+
 	configuration = *cfg
 
+	factory, err := data.NewDbFactory(&configuration)
+	if err != nil || factory == nil {
+		glog.Fatalf("Failed to instantiate db factory: %s", err)
+		panic(fmt.Errorf("Fatal error on instantiate db factory : %s ", err))
+	}
+
+	database, err := factory.DBConnection()
+	if err != nil || database == nil {
+		glog.Fatalf("Failed to create db connection: %s", err)
+		panic(fmt.Errorf("Fatal error connecting to db : %s ", err))
+	}
+	db = database
 }
 
 func main() {
@@ -40,7 +56,7 @@ func main() {
 	gin.SetMode(configuration.Server.Mode)
 
 	//load router
-	r := shared.SetupRouter(&configuration)
+	r := shared.SetupRouter(&configuration, db)
 
 	srv := &http.Server{
 		Addr:    configuration.Server.Addr,
