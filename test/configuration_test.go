@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Friend-Management/config"
+	"github.com/Friend-Management/shared/config"
 	"github.com/golang/glog"
 	"github.com/stretchr/testify/assert"
 )
