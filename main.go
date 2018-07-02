@@ -7,20 +7,20 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Friend-Management/shared"
 	"github.com/Friend-Management/shared/config"
 	"github.com/Friend-Management/shared/data"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
+	"github.com/Friend-Management/shared"
 )
 
 var (
 	runMigration  bool
-	runSeeder     bool
 	db            *gorm.DB
 	configuration config.Configuration
+	router		  *gin.Engine
 )
 
 func init() {
@@ -51,6 +51,9 @@ func init() {
 		panic(fmt.Errorf("Fatal error connecting to db : %s ", err))
 	}
 	db = database
+	routerInstance := shared.NewRouter(&configuration, db)
+
+	router = routerInstance.SetupRouter()
 
 	glog.V(2).Info("Migration status : %s", runMigration)
 
@@ -75,12 +78,11 @@ func main() {
 	glog.V(2).Infof("Server run on mode: %s", configuration.Server.Mode)
 	gin.SetMode(configuration.Server.Mode)
 
-	//load router
-	r := shared.SetupRouter(&configuration, db)
+
 
 	srv := &http.Server{
 		Addr:    configuration.Server.Addr,
-		Handler: r,
+		Handler: router,
 	}
 
 	if err := srv.ListenAndServe(); err != nil {

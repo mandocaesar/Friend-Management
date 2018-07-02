@@ -1,7 +1,7 @@
 package data
 
 import (
-	registration "github.com/Friend-Management/module/registration/model"
+	"github.com/Friend-Management/module/registration/model"
 	"github.com/Friend-Management/shared/config"
 	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
