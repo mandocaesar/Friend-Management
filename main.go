@@ -10,17 +10,17 @@ import (
 	"github.com/Friend-Management/shared/config"
 	"github.com/Friend-Management/shared/data"
 
+	"github.com/Friend-Management/shared"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
-	"github.com/Friend-Management/shared"
 )
 
 var (
 	runMigration  bool
 	db            *gorm.DB
 	configuration config.Configuration
-	router		  *gin.Engine
+	router        *gin.Engine
 )
 
 func init() {
@@ -78,8 +78,6 @@ func main() {
 	glog.V(2).Infof("Server run on mode: %s", configuration.Server.Mode)
 	gin.SetMode(configuration.Server.Mode)
 
-
-
 	srv := &http.Server{
 		Addr:    configuration.Server.Addr,
 		Handler: router,
@@ -95,6 +93,7 @@ func main() {
 	// give n seconds for server to shutdown gracefully
 	duration := time.Duration(configuration.Server.ShutdownTimeout) * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), duration)
+
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {

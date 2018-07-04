@@ -19,7 +19,7 @@ type Service struct {
 func NewService(Db *gorm.DB) (*Service, error) {
 
 	if Db == nil {
-		return nil, errors.New("failed to intantiate Service , Db intance is null")
+		return nil, errors.New("failed to instantiate Service , Db instance is null")
 	}
 	return &Service{db: Db}, nil
 }
@@ -39,7 +39,6 @@ func (s *Service) CreateUser(email string) (bool, error, uint) {
 		return false, tx.Error, 0
 	}
 
-
 	if !tx.Where("Email = ?", email).RecordNotFound() {
 		if err := tx.Create(&user).Error; err != nil {
 			glog.V(2).Infof("Error when saving user : %s", err)
@@ -52,7 +51,7 @@ func (s *Service) CreateUser(email string) (bool, error, uint) {
 		return true, nil, user.ID
 
 	} else {
-		return false, errors.New("Email already registered"),0
+		return false, errors.New("Email already registered"), 0
 	}
 
 }

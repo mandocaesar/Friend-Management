@@ -16,13 +16,12 @@ import (
 
 type Router struct {
 	db                 *gorm.DB
-	configuration 	   *config.Configuration
+	configuration      *config.Configuration
 	registerController *registration.Controller
 	registerService    *registration.Service
 }
 
-
-func NewRouter(c *config.Configuration, Db *gorm.DB)(*Router){
+func NewRouter(c *config.Configuration, Db *gorm.DB) *Router {
 	registerService, err := registration.NewService(Db)
 	if err != nil {
 		glog.Fatalf("Failed to instantiate new Registration Service: %s", err)
@@ -36,10 +35,8 @@ func NewRouter(c *config.Configuration, Db *gorm.DB)(*Router){
 		panic(fmt.Errorf("Fatal error: %s", "registration controller failed to instantiate"))
 	}
 
-	return &Router{Db, c ,registerController, registerService}
+	return &Router{Db, c, registerController, registerService}
 }
-
-
 
 //SetupRouter : function that return registered end point
 func (r *Router) SetupRouter() *gin.Engine {

@@ -16,7 +16,10 @@
 [[projects]]
   branch = "master"
   name = "github.com/denisenkom/go-mssqldb"
-  packages = [".","internal/cp"]
+  packages = [
+    ".",
+    "internal/cp"
+  ]
   revision = "3724b4745ca99cd0374ace516e93c022c00dfda9"
 
 [[projects]]
@@ -33,7 +36,11 @@
 
 [[projects]]
   name = "github.com/gin-gonic/gin"
-  packages = [".","binding","render"]
+  packages = [
+    ".",
+    "binding",
+    "render"
+  ]
   revision = "d459835d2b077e44f7c9b453505ee29881d5d12d"
   version = "v1.2"
 
@@ -58,12 +65,29 @@
 [[projects]]
   branch = "master"
   name = "github.com/hashicorp/hcl"
-  packages = [".","hcl/ast","hcl/parser","hcl/printer","hcl/scanner","hcl/strconv","hcl/token","json/parser","json/scanner","json/token"]
+  packages = [
+    ".",
+    "hcl/ast",
+    "hcl/parser",
+    "hcl/printer",
+    "hcl/scanner",
+    "hcl/strconv",
+    "hcl/token",
+    "json/parser",
+    "json/scanner",
+    "json/token"
+  ]
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
   name = "github.com/jinzhu/gorm"
-  packages = [".","dialects/mssql","dialects/mysql","dialects/postgres","dialects/sqlite"]
+  packages = [
+    ".",
+    "dialects/mssql",
+    "dialects/mysql",
+    "dialects/postgres",
+    "dialects/sqlite"
+  ]
   revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
   version = "v1.9.1"
 
@@ -76,7 +100,11 @@
 [[projects]]
   branch = "master"
   name = "github.com/lib/pq"
-  packages = [".","hstore","oid"]
+  packages = [
+    ".",
+    "hstore",
+    "oid"
+  ]
   revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
 
 [[projects]]
@@ -110,6 +138,12 @@
   version = "v1.2.0"
 
 [[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -117,7 +151,10 @@
 
 [[projects]]
   name = "github.com/spf13/afero"
-  packages = [".","mem"]
+  packages = [
+    ".",
+    "mem"
+  ]
   revision = "787d034dfe70e44075ccc060d346146ef53270ad"
   version = "v1.1.1"
 
@@ -177,7 +214,14 @@
 
 [[projects]]
   name = "golang.org/x/text"
-  packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
+  packages = [
+    "internal/gen",
+    "internal/triegen",
+    "internal/ucd",
+    "transform",
+    "unicode/cldr",
+    "unicode/norm"
+  ]
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
   version = "v0.3.0"
 
@@ -202,6 +246,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d6d47c93f82ba3dce9972631a67a26871f268c394257ab0a906da35a86f02c07"
+  inputs-digest = "d11219a566903c2913721c47db3cfab92c5ee3eae56169f0564d6c59a7f6d409"
   solver-name = "gps-cdcl"
   solver-version = 1

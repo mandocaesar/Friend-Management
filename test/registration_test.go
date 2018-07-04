@@ -6,16 +6,16 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/Friend-Management/module/registration"
 	"github.com/Friend-Management/shared/config"
 	"github.com/Friend-Management/shared/data"
-	"github.com/Friend-Management/module/registration"
 
+	"github.com/Friend-Management/shared"
 	"github.com/golang/glog"
 	"github.com/stretchr/testify/assert"
-	"github.com/Friend-Management/shared"
 )
 
-func TestServiceRegisterUser(t *testing.T){
+func TestServiceRegisterUser(t *testing.T) {
 	cfg, err := config.New()
 
 	if err != nil {
@@ -33,14 +33,13 @@ func TestServiceRegisterUser(t *testing.T){
 		glog.Fatalf("Failed to create connection: %s", err)
 	}
 
-	userservice , error:= registration.NewService(database)
+	userservice, error := registration.NewService(database)
 
 	result, err, id := userservice.CreateUser("test@test.com")
 
 	assert.NotEqual(t, id, 0)
 	assert.True(t, result)
 	assert.Nil(t, err)
-
 
 }
 

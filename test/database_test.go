@@ -15,6 +15,7 @@ func TestDatabaseConnection(t *testing.T) {
 	assert.NotNil(t, cfg)
 }
 
+//TestDatabaseInstance : test database instance creation
 func TestDatabaseInstance(t *testing.T) {
 	cfg, err := LoadConfiguration()
 	//test configuration
